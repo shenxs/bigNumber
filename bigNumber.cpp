@@ -10,6 +10,7 @@ bigNumber::~bigNumber()
 
 bigNumber::bigNumber(string s)
 {
+    //初始化数字链表
     number.init(s);
 }
 ostream& operator<<(ostream& output,bigNumber& b) //定义运算符“<<”重载函数
@@ -26,4 +27,9 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 
+bigNumber bigNumber::operator=(const bigNumber & des)
+{
+    this->number.copyList(des.number);
+    return *this;
+}
 

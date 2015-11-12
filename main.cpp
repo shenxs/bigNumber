@@ -10,10 +10,15 @@ int main()
 {
 
     bigNumber test;
+    cout<<"请输入数字"<<endl;
     cin>>test;
-    bigNumber a;
-    cin>>a;
-    cout<<a<<endl;
-    cout<<test<<endl;
+
+    bigNumber test2;
+    cin>>test2;
+
+    test=test2;
+    cout<<test;
+
+
     return 0;
 }
