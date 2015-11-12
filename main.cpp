@@ -9,16 +9,14 @@ using namespace std;
 int main()
 {
 
-    bigNumber test;
-    cout<<"请输入数字"<<endl;
-    cin>>test;
+    bigNumber a,b,c;
+    cout<<"请输入a"<<endl;
+    cin>>a;
 
-    bigNumber test2;
-    cin>>test2;
+    cout<<"输入b"<<endl;
 
-    test=test2;
-    cout<<test;
+    cin>>b;
 
-
+    c=b+c;
     return 0;
 }

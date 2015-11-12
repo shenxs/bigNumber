@@ -15,7 +15,8 @@ public:
     friend istream& operator >> (istream&,bigNumber&); //声明重载运算符“>>”
 
  //运算符重载
-    bigNumber operator=(const bigNumber &des);
+    bigNumber & operator=(const bigNumber &des);
+    bigNumber & operator+(const bigNumber &des);
 private:
     list number;
 };

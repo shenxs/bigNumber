@@ -26,10 +26,16 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     b.number.init(str);
     return input;
 }
-
-bigNumber bigNumber::operator=(const bigNumber & des)
+//等号运算符
+bigNumber& bigNumber::operator=(const bigNumber & des)
 {
     this->number.copyList(des.number);
     return *this;
 }
-
+//加号重载
+bigNumber& bigNumber::operator+(const bigNumber & des)
+{
+    bigNumber *temp =new bigNumber(this->number.add(des.number).toString());
+    cout<<temp<<endl;
+    return *temp;
+}
