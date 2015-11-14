@@ -16,7 +16,7 @@ public:
 
  //运算符重载
     bigNumber & operator=(const bigNumber &des);
-    bigNumber & operator+(const bigNumber &des);
+    bigNumber  operator+(const bigNumber &des)const;
 private:
     list number;
 };

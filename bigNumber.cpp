@@ -2,11 +2,16 @@
 
 //默认构造函数
 bigNumber::bigNumber()
-{}
+{
+    number.init("0");
+}
 
 //默认析构函数
 bigNumber::~bigNumber()
-{}
+{
+    number.~list();
+}
+
 
 bigNumber::bigNumber(string s)
 {
@@ -33,9 +38,8 @@ bigNumber& bigNumber::operator=(const bigNumber & des)
     return *this;
 }
 //加号重载
-bigNumber& bigNumber::operator+(const bigNumber & des)
+bigNumber bigNumber::operator+(const bigNumber & des) const
 {
-    bigNumber *temp =new bigNumber(this->number.add(des.number).toString());
-    cout<<temp<<endl;
-    return *temp;
+    bigNumber temp(this->number.add(des.number).toString());
+    return temp;
 }

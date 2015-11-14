@@ -2,9 +2,9 @@
 //默认构造函数
 list::list()
 {
-    node *temp=new node(0);
-    head=tail=temp;
-    length=1;
+    head=NULL;
+    tail=NULL;
+    length=0;
 }
 list::list(int n)
 {
@@ -21,16 +21,13 @@ list::list(int n)
 //析构函数
 list::~list()
 {
-    if(this->length!=0)
+    while(head!=NULL)
     {
-        while(head!=tail)
-        {
-            node *temp=head;
-            head=temp->next;
-            delete temp;
-        }
-        delete tail;
+        node* temp=head;
+        head=head->next;
+        delete temp;
     }
+    head=tail=NULL;
     length=0;
 }
 //在链表的尾部增加
@@ -89,54 +86,66 @@ string list::toString() const
     return str;
 }
 
+void list::addAThead(int n)
+{
+    node * temp=new node(n);
+    if(this->length==0)
+    {
+        head=temp;
+        tail=temp;
+        length++;
+    }
+    else
+    {
+        temp->next=head;
+        head->pre=temp;
+        head=temp;
+        length++;
+    }
+}
+
 void list::copyList(const list  &des)
 {
     string temp=des.toString();
     this->init(temp);
 }
 
-list list::add(const list des)
+list list::add(list des) const
 {
-    node *h1=des.head;//头指针
     node *t1=des.tail;//尾部指针
 
-    node *h2=this->head;
     node *t2=this->tail;
 
-    int max=0;
-    if(this->length>des.length)
-        max=this->length;
-    else
-        max=des.length;
-
-    //初始化一个链表长度为最长的链表加1
-    //防止出现进位出现
-    list temp(++max);
-    node *t3=temp.tail;
-
-    int content=0;//每一位的计算容器
+    int content=0;
     int jingwei=0;
-    while(!(h1==t1&&h2==t2))
+    list temp;
+    while(t1!=NULL||t2!=NULL||jingwei!=0)
     {
-        if(t2==NULL)
-            cout<<"t空"<<endl;
-
-        content = t1->value+t2->value+jingwei;
-        if(content>9)
+        if(t1!=NULL)
         {
-            content-=10;
-            jingwei=1;
+            content+=t1->value;
+            t1=t1->pre;
         }
-        t3->value=content;
-
-        t1=t1->pre;
-        t2=t2->pre;
-        t3=t3->pre;
+        if(t2!=NULL)
+        {
+            content+=t2->value;
+            t2=t2->pre;
+        }
+        content+=jingwei;
+        if(content>9)
+            {
+                jingwei=1;
+                temp.addAThead(content-10);
+                content=0;
+            }
+        else
+        {
+            jingwei=0;
+            temp.addAThead(content);
+            content=0;
+        }
     }
-
-
-    //todo 检验最高位是否为0
-
     return temp;
+
 }
 

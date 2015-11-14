@@ -14,6 +14,8 @@ public:
     ~list();
     //在链表的末尾增加
     void addATtail(int n);
+    //在链表的头部增加
+    void addAThead(int n);
     //初始化一个链表
     //string ->list of int
     void init(string s);
@@ -27,7 +29,7 @@ public:
     //加法
     //list->list
     //将两个链表相加
-    list add(const list  des);
+    list add( list  des) const;
 
     node *head;//头指针
     node *tail;//尾指针
