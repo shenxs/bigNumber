@@ -32,14 +32,17 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 //等号运算符
-bigNumber& bigNumber::operator=(const bigNumber & des)
+bigNumber &bigNumber::operator=(const bigNumber & des)
 {
     this->number.copyList(des.number);
     return *this;
 }
 //加号重载
-bigNumber bigNumber::operator+(const bigNumber & des) const
+bigNumber operator+(bigNumber & b1,bigNumber &b2)
 {
-    bigNumber temp(this->number.add(des.number).toString());
+    list tempList;
+
+    tempList=b1.number.add(b2.number);
+    bigNumber temp(tempList.toString());
     return temp;
 }

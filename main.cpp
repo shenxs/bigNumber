@@ -12,11 +12,11 @@ int main()
     bigNumber a,b,c;
     cout<<"请输入a"<<endl;
     cin>>a;
-
+    cout<<"a="<<a<<endl;
     cout<<"输入b"<<endl;
-
     cin>>b;
-    c=b+a;
-    cout<<c<<endl;
+    cout<<"b="<<b<<endl;
+    b+a;
+    cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
     return 0;
 }

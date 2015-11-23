@@ -8,9 +8,7 @@ list::list()
 }
 list::list(int n)
 {
-    head=NULL;
-    tail=NULL;
-    length=0;
+    this->~list();
     string temp="";
     for(int i=0;i<n;i++)
     {
@@ -21,23 +19,22 @@ list::list(int n)
 //析构函数
 list::~list()
 {
-    while(head!=NULL)
+    while(length>0)
     {
-        node* temp=head;
-        head=head->next;
+        node* temp=tail;
+        tail=tail->pre;
         delete temp;
+        length--;
     }
-    head=tail=NULL;
-    length=0;
+    head=NULL;//删除最后一个节点后将头指针置空
 }
 //在链表的尾部增加
 void list::addATtail(int n)
 {
     node *temp=new node(n);
-    if(head==NULL)
+    if(length==0)
     {
-        head=temp;
-        tail=temp;
+        head=tail=temp;
     }
     else
     {
@@ -54,7 +51,13 @@ void list::init(string s)
     int l=s.length();
     for (int i = 0; i < l; ++i)
     {
-        addATtail(s[i]-'0');
+        int n=s[i]-'0';
+        if(n>=0&&n<=9)
+            addATtail(s[i]-'0');
+        else
+        {
+            cout<<"构造字段包含非数字字符"<<endl;
+        }
     }
 }
 //转化为字符串
@@ -62,29 +65,14 @@ string list::toString()
 {
     string str="";
     node *cur=head;
-    while(cur!=tail)
+    while(cur!=NULL)
     {
         str+=cur->value+'0';
         cur=cur->next;
     }
-    if(tail!=NULL)
-        str+=tail->value+'0';
     return str;
 }
 
-string list::toString() const
-{
-    string str="";
-    node *cur=head;
-    while(cur!=tail)
-    {
-        str+=cur->value+'0';
-        cur=cur->next;
-    }
-    if(tail!=NULL)
-        str+=tail->value+'0';
-    return str;
-}
 
 void list::addAThead(int n)
 {
@@ -104,13 +92,13 @@ void list::addAThead(int n)
     }
 }
 
-void list::copyList(const list  &des)
+void list::copyList(list  des)
 {
     string temp=des.toString();
     this->init(temp);
 }
 
-list list::add(list des) const
+list list::add(list &des)
 {
     node *t1=des.tail;//尾部指针
 
@@ -133,17 +121,16 @@ list list::add(list des) const
         }
         content+=jingwei;
         if(content>9)
-            {
+        {
                 jingwei=1;
                 temp.addAThead(content-10);
-                content=0;
-            }
+        }
         else
         {
             jingwei=0;
             temp.addAThead(content);
-            content=0;
         }
+        content=0;
     }
     return temp;
 
