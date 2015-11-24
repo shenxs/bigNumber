@@ -28,9 +28,17 @@ int main()
     {
         cout<<"e equals d"<<endl;
     }
+    else if (e>d)
+    {
+        cout<<"e大于d"<<endl;
+    }
+    else if (e<d)
+    {
+        cout<<"e小于d"<<endl;
+    }
     else
     {
-        cout<<"e not equals d"<<endl;
+        cout<<"怎么可能?!哪里错了"<<endl;
     }
     return 0;
 }

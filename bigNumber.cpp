@@ -60,3 +60,53 @@ bigNumber bigNumber::operator+(const bigNumber & b) const
     return temp;
 }
 
+bool bigNumber::operator>(const bigNumber & b) const
+{
+    string x=this->number.toString();
+    string y=b.number.toString();
+
+    if(x.length()==y.length())
+    {
+        if(x==y)
+        {
+            return false;
+        }
+        else//zhu wei bi jiao
+        {
+            int l=x.length();
+            for(int i=0;i<l;i++)
+            {
+                if(x[i]>y[i])
+                    return true;
+                else if(x[i]<y[i])
+                    return false;
+            }
+
+        }
+    }
+
+    else if(x.length()>y.length())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool bigNumber::operator<(const bigNumber &b) const
+{
+    if(*this==b)
+    {
+        return false;
+    }
+    else if(*this>b)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}

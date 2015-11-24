@@ -16,6 +16,8 @@ public:
     bigNumber &operator=(const bigNumber &b);
     bool      operator==(const bigNumber &b) const;
     bigNumber operator+(const bigNumber  &b) const;
+    bool      operator>(const bigNumber  &b ) const;
+    bool      operator<(const bigNumber  &b) const;
 
 private:
     list number;
