@@ -18,7 +18,7 @@ bigNumber::bigNumber(string s)
     //初始化数字链表
     number.init(s);
 }
-ostream& operator<<(ostream& output,bigNumber& b) //定义运算符“<<”重载函数
+ostream& operator<<(ostream& output,const bigNumber& b) //定义运算符“<<”重载函数
 {
    output<<b.number.toString();
    return output;
@@ -44,7 +44,6 @@ bigNumber &bigNumber::operator=(const bigNumber & des)
 bigNumber bigNumber::operator+(const bigNumber & b) const
 {
     bigNumber temp((this->number.add(b.number)).toString());
-    cout<<temp.number.toString()<<endl;
     return temp;
 }
 

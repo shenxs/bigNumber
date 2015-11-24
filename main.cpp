@@ -16,7 +16,8 @@ int main()
     cout<<"输入b"<<endl;
     cin>>b;
     cout<<"b="<<b<<endl;
-    c=b+a;
+    c=a+b;
+    a+b;
     cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
     return 0;
 }

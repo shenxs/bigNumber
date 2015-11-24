@@ -9,7 +9,7 @@ public:
     ~bigNumber();
 
  //io流运算符重载为友元函数
-    friend ostream& operator << (ostream&,bigNumber&);//输出流重载
+    friend ostream& operator << (ostream&,const  bigNumber&);//输出流重载
     friend istream& operator >> (istream&,bigNumber&); //输入流重载
 
  //运算符重载

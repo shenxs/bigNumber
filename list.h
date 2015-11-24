@@ -22,8 +22,9 @@ public:
     //list of int ->string
     //将一个链表表示的数字拼接为一个字符串
     string toString();
+    string toString() const;
     //从另一个链表拷贝
-    void copyList(list  des);
+    void copyList(const list & des);
     //加法
     //list->list
     //将两个链表相加

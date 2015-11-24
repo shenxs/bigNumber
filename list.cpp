@@ -72,7 +72,17 @@ string list::toString()
     }
     return str;
 }
-
+string list::toString() const
+{
+    string str="";
+    node *cur=head;
+    while(cur!=NULL)
+    {
+        str+=cur->value+'0';
+        cur=cur->next;
+    }
+    return str;
+}
 
 void list::addAThead(int n)
 {
@@ -92,7 +102,7 @@ void list::addAThead(int n)
     }
 }
 
-void list::copyList(list  des)
+void list::copyList(const list & des)
 {
     string temp=des.toString();
     this->~list();
@@ -103,7 +113,7 @@ list list::add(const list &des) const
 {
     node *t1=des.tail;//尾部指针
 
-    node *t2=this->tail;
+    node *t2=tail;
 
     int content=0;
     int jingwei=0;
