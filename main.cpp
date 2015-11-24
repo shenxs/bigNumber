@@ -17,7 +17,20 @@ int main()
     cin>>b;
     cout<<"b="<<b<<endl;
     c=a+b;
-    a+b;
     cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
+
+    bigNumber e,d;
+    cout<<"请输入e,d"<<endl;
+    cin>>e>>d;
+    cout<<"e="<<e<<endl;
+    cout<<"d="<<d<<endl;
+    if(e==d)
+    {
+        cout<<"e equals d"<<endl;
+    }
+    else
+    {
+        cout<<"e not equals d"<<endl;
+    }
     return 0;
 }

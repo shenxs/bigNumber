@@ -38,6 +38,19 @@ bigNumber &bigNumber::operator=(const bigNumber & des)
     return *this;
 }
 
+bool bigNumber::operator==(const bigNumber &b) const
+{
+    string x=this->number.toString();
+    string y=b.number.toString();
+    if(x==y)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 //加号重载
 
