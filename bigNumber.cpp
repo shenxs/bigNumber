@@ -37,12 +37,14 @@ bigNumber &bigNumber::operator=(const bigNumber & des)
     this->number.copyList(des.number);
     return *this;
 }
-//加号重载
-bigNumber operator+(bigNumber & b1,bigNumber &b2)
-{
-    list tempList;
 
-    tempList=b1.number.add(b2.number);
-    bigNumber temp(tempList.toString());
+
+//加号重载
+
+bigNumber bigNumber::operator+(const bigNumber & b) const
+{
+    bigNumber temp((this->number.add(b.number)).toString());
+    cout<<temp.number.toString()<<endl;
     return temp;
 }
+

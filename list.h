@@ -27,7 +27,7 @@ public:
     //加法
     //list->list
     //将两个链表相加
-    list add(list  &des) ;
+    list add(const list &des) const ;
 
     node *head;//头指针
     node *tail;//尾指针

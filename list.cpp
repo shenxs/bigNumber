@@ -95,10 +95,11 @@ void list::addAThead(int n)
 void list::copyList(list  des)
 {
     string temp=des.toString();
+    this->~list();
     this->init(temp);
 }
 
-list list::add(list &des)
+list list::add(const list &des) const
 {
     node *t1=des.tail;//尾部指针
 

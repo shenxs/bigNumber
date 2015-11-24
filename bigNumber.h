@@ -14,7 +14,7 @@ public:
 
  //运算符重载
     bigNumber &operator=(const bigNumber &des);
-    friend bigNumber operator+( bigNumber &b1,bigNumber &b2);
+    bigNumber operator+(const bigNumber & b) const;
 
 private:
     list number;
