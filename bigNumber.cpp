@@ -32,7 +32,7 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 //等号运算符
-bigNumber &bigNumber::operator=(const bigNumber & des)
+bigNumber& bigNumber::operator=(const bigNumber & des)
 {
     this->number.copyList(des.number);
     return *this;
@@ -53,12 +53,6 @@ bool bigNumber::operator==(const bigNumber &b) const
 }
 
 //加号重载
-
-bigNumber bigNumber::operator+(const bigNumber & b) const
-{
-    bigNumber temp((this->number.add(b.number)).toString());
-    return temp;
-}
 
 bool bigNumber::operator>(const bigNumber & b) const
 {
@@ -81,7 +75,8 @@ bool bigNumber::operator>(const bigNumber & b) const
                 else if(x[i]<y[i])
                     return false;
             }
-
+            cout<<"如果你在程序运行时看到这条信息,代表程序员又要去debug了"<<endl;
+            return false;
         }
     }
 
@@ -109,4 +104,28 @@ bool bigNumber::operator<(const bigNumber &b) const
     {
         return true;
     }
+}
+
+bigNumber bigNumber::operator+(const bigNumber & b) const
+{
+    bigNumber temp((this->number.add(b.number)).toString());
+    return temp;
+}
+
+bigNumber bigNumber::operator-(const bigNumber & b)const
+{
+    string str;
+    if((*this)>b||(*this)==b)//大于或等于就相减
+    {
+        str=this->number.sub(b.number).toString();
+        bigNumber temp(str);
+        cout<<"str="<<str<<endl;
+        return temp;
+    }
+    else
+    {
+        bigNumber temp((b.number.sub(this->number)).toString());
+        return temp;
+    }
+
 }

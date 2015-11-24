@@ -10,6 +10,7 @@ int main()
 {
 
     bigNumber a,b,c;
+    a+b;
     cout<<"请输入a"<<endl;
     cin>>a;
     cout<<"a="<<a<<endl;
@@ -17,24 +18,25 @@ int main()
     cin>>b;
     cout<<"b="<<b<<endl;
     c=a+b;
+    cout<<a+b<<endl;
     cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
+    cout<<a<<b<<endl;
+    c=a-b;
+    cout<<"c=a-b="<<a-b<<endl;
 
-    bigNumber e,d;
-    cout<<"请输入e,d"<<endl;
-    cin>>e>>d;
-    cout<<"e="<<e<<endl;
-    cout<<"d="<<d<<endl;
-    if(e==d)
+    cout<<a<<endl;
+    cout<<a<<endl;
+    if(a==c)
     {
-        cout<<"e equals d"<<endl;
+        cout<<"a equals c"<<endl;
     }
-    else if (e>d)
+    else if (a>c)
     {
-        cout<<"e大于d"<<endl;
+        cout<<"a大于c"<<endl;
     }
-    else if (e<d)
+    else if (a<c)
     {
-        cout<<"e小于d"<<endl;
+        cout<<"a小于c"<<endl;
     }
     else
     {

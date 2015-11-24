@@ -12,13 +12,16 @@ public:
     friend ostream& operator << (ostream&,const  bigNumber&);//输出流重载
     friend istream& operator >> (istream&,bigNumber&); //输入流重载
 
- //运算符重载
-    bigNumber &operator=(const bigNumber &b);
+ //比较运算符重载
+    bigNumber &operator=(const bigNumber  &b);
     bool      operator==(const bigNumber &b) const;
-    bigNumber operator+(const bigNumber  &b) const;
     bool      operator>(const bigNumber  &b ) const;
     bool      operator<(const bigNumber  &b) const;
-
+//加减乘除
+    bigNumber operator+(const bigNumber &b) const;
+    bigNumber operator-(const bigNumber &b) const;
+    bigNumber operator*(const bigNumber &b) const;
+    bigNumber operator/(const bigNumber &b) const;
 private:
     list number;
 };

@@ -144,6 +144,45 @@ list list::add(const list &des) const
         content=0;
     }
     return temp;
+}
 
+//减法即a+(-b) 进位对应为-1
+list list::sub(const list &des) const
+{
+    node *t1=des.tail;//尾部指针
+
+    node *t2=tail;
+
+    int content=0;
+    int jingwei=0;
+    list temp;
+    while(t1!=NULL||t2!=NULL||jingwei!=0)
+    {
+        if(t1!=NULL)
+        {
+            content+=(-1)*(t1->value);
+            t1=t1->pre;
+        }
+        if(t2!=NULL)
+        {
+            content+=t2->value;
+            t2=t2->pre;
+        }
+        content+=jingwei;
+        if(content<0)
+        {
+                jingwei=-1;
+                temp.addAThead(content+10);
+        }
+        else
+        {
+            jingwei=0;
+            temp.addAThead(content);
+        }
+        content=0;
+    }
+    //todo 如果链表的一开始有大量的0 要去除
+    cout<<temp.toString()<<endl;
+    return temp;
 }
 
