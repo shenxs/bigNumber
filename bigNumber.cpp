@@ -118,14 +118,15 @@ bigNumber bigNumber::operator-(const bigNumber & b)const
     if((*this)>b||(*this)==b)//大于或等于就相减
     {
         str=this->number.sub(b.number).toString();
-        bigNumber temp(str);
-        cout<<"str="<<str<<endl;
-        return temp;
+        bigNumber *temp= new bigNumber(str);
+        return *temp;
     }
-    else
+    else//暂时不考虑负号
     {
-        bigNumber temp((b.number.sub(this->number)).toString());
-        return temp;
+        str=b.number.sub(this->number).toString();
+        bigNumber *temp= new bigNumber(str);
+        return *temp;
+
     }
 
 }

@@ -18,14 +18,10 @@ int main()
     cin>>b;
     cout<<"b="<<b<<endl;
     c=a+b;
-    cout<<a+b<<endl;
     cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
-    cout<<a<<b<<endl;
     c=a-b;
     cout<<"c=a-b="<<a-b<<endl;
 
-    cout<<a<<endl;
-    cout<<a<<endl;
     if(a==c)
     {
         cout<<"a equals c"<<endl;

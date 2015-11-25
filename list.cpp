@@ -102,10 +102,9 @@ void list::addAThead(int n)
     }
 }
 
-void list::copyList(const list & des)
+void list::copyList(const list &des)
 {
     string temp=des.toString();
-    this->~list();
     this->init(temp);
 }
 
@@ -182,7 +181,13 @@ list list::sub(const list &des) const
         content=0;
     }
     //todo 如果链表的一开始有大量的0 要去除
-    cout<<temp.toString()<<endl;
+    while(temp.length>1&&temp.head->value==0)
+    {
+        node * tempNode=temp.head;
+        temp.head=temp.head->next;
+        delete tempNode;
+        temp.length--;
+    }
     return temp;
 }
 

@@ -24,7 +24,7 @@ public:
     string toString();
     string toString() const;
     //从另一个链表拷贝
-    void copyList(const list & des);
+    void copyList(const list &des);
     //加法
     //list->list
     //将两个链表相加
