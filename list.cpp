@@ -180,13 +180,14 @@ list list::sub(const list &des) const
         }
         content=0;
     }
-    //todo 如果链表的一开始有大量的0 要去除
+    //如果链表的一开始有大量的0 要去除
     while(temp.length>1&&temp.head->value==0)
     {
         node * tempNode=temp.head;
         temp.head=temp.head->next;
+        temp.head->pre=NULL;
         delete tempNode;
-        temp.length--;
+        temp.length=temp.length-1;
     }
     return temp;
 }

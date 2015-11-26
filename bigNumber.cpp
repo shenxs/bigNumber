@@ -32,10 +32,10 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 //等号运算符
-bigNumber& bigNumber::operator=(const bigNumber & des)
+void bigNumber::operator=(const bigNumber  des)
 {
+
     this->number.copyList(des.number);
-    return *this;
 }
 
 bool bigNumber::operator==(const bigNumber &b) const
@@ -117,16 +117,65 @@ bigNumber bigNumber::operator-(const bigNumber & b)const
     string str;
     if((*this)>b||(*this)==b)//大于或等于就相减
     {
-        str=this->number.sub(b.number).toString();
-        bigNumber *temp= new bigNumber(str);
-        return *temp;
+        bigNumber temp((this->number.sub(b.number)).toString());
+        return temp;
     }
     else//暂时不考虑负号
     {
         str=b.number.sub(this->number).toString();
-        bigNumber *temp= new bigNumber(str);
-        return *temp;
+        bigNumber temp(str);
+        return temp;
 
     }
 
+}
+bool bigNumber::operator!=(const bigNumber &b) const
+{
+    bigNumber zero("0");
+    if((*this)-b==zero)
+        return false;
+    else
+        return true;
+
+}
+
+bigNumber  bigNumber::operator*(const bigNumber &b) const
+{
+    bigNumber zero("0");
+    bigNumber one("1");
+    bigNumber result;
+    bigNumber x=*this;
+    bigNumber y=b;
+    while(y!=zero)
+    {
+        result=result+x;
+        y=y-one;
+    }
+    return result;
+}
+
+bigNumber bigNumber::operator/(const bigNumber &b) const
+{
+    bigNumber zero("0");
+    bigNumber one("1");
+    bigNumber temp;
+    bigNumber result;
+    bigNumber x=*this;
+    bigNumber y=b;
+
+    if(y==zero)
+    {
+        cout<<"divied eror"<<endl;
+        return zero;
+    }
+    else
+    {
+        while(x>y||x==y)
+        {
+            x=x-y;
+            result=result+one;
+            cout<<"循环中...."<<endl;
+        }
+        return result;
+    }
 }
