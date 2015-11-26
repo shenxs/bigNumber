@@ -26,12 +26,14 @@ public:
     string toString() const;
     //从另一个链表拷贝
     void copyList(const list &des);
-    //加法
-    //list->list
-    //将两个链表相加
+    list & operator=(const list &des);
+    list sublist(int ,int ) const;
+    bool operator>=(const list &des);
     list add(const list &des) const;
     list sub(const list &des) const;
     list multi(const list &des) const;
+    list multi(int) const;//只在除法中使用,int参数只能使用10以内的整数
+    list divide(const list &des) const;
     node *head;//头指针
     node *tail;//尾指针
     int length;//数字既链表的长度

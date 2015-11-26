@@ -10,7 +10,6 @@ int main()
 {
 
     bigNumber a,b,c;
-    a+b;
     cout<<"请输入a"<<endl;
     cin>>a;
     cout<<"a="<<a<<endl;
@@ -18,12 +17,13 @@ int main()
     cin>>b;
     cout<<"b="<<b<<endl;
     c=a+b;
-    cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
+    cout<<"c=a+b="<<c<<endl;
     c=a-b;
-    cout<<"a=a-b="<<c<<endl;
+    cout<<"c=a-b="<<c<<endl;
     c=a*b;
     cout<<"c=a*b="<<c<<endl;
     c=a/b;
+    cout<<"c=a/b="<<c<<endl;
      if(a==c)
     {
         cout<<"a equals c"<<endl;

@@ -147,17 +147,20 @@ bigNumber bigNumber::operator/(const bigNumber &b) const
 {
     bigNumber result;
     bigNumber zero("0");
+    bigNumber one("1");
     if(b==zero)
     {
         cout<<"除数不能为0"<<endl;
     }
-    else if(*this>zero)
+    else if((*this)==b)
     {
-
+        result=one;
     }
     else
     {
-        ;
+        bigNumber temp(this->number.divide(b.number).toString());
+        result=temp;
+
     }
 
     return result;

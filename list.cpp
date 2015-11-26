@@ -28,6 +28,50 @@ list::~list()
     }
     head=NULL;//删除最后一个节点后将头指针置空
 }
+
+list & list::operator=(const list &des)
+{
+    this->copyList(des);
+    return *this;
+}
+
+bool list::operator>=(const list &des)
+{
+    string x=this->toString();
+    string y=des.toString();
+
+    if(x.length()==y.length())
+    {
+        if(x==y)
+        {
+            return true;
+        }
+        else//zhu wei bi jiao
+        {
+            int l=x.length();
+            for(int i=0;i<l;i++)
+            {
+                if(x[i]>y[i])
+                    return true;
+                if(x[i]<y[i])
+                    return false;
+            }
+            cout<<"如果你在程序运行时看到这条信息,代表程序员又要去debug了"<<endl;
+            return false;
+        }
+    }
+
+    else if(x.length()>y.length())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
 //在链表的尾部增加
 void list::addATtail(int n)
 {
@@ -82,6 +126,13 @@ string list::toString() const
         cur=cur->next;
     }
     return str;
+}
+
+list list::sublist(int start,int end ) const
+{
+    list temp;
+    temp.init(this->toString().substr(start,end));
+    return temp;
 }
 
 void list::addAThead(int n)
@@ -160,7 +211,7 @@ list list::sub(const list &des) const
     int content=0;
     int jingwei=0;
     list temp;
-    while(t1!=des.head->pre||t2!=head->pre||jingwei!=0)
+    while(t1!=NULL||t2!=NULL||jingwei!=0)
     {
         if(t1!=NULL)
         {
@@ -276,6 +327,85 @@ list list::multi(const list &des) const
     return result;
 }
 
+list list::multi(int n) const
+{
+    char char_n;
+    string temp;
+    while(n!=0)
+    {
+        char_n=(n%10)+'0';
+        temp=char_n+temp;
+        n/=10;
+    }
+    list list_of_n;
+    list_of_n.init(temp);
+    return this->multi(list_of_n);
+}
+
+list list::divide(const list&des)const
+{
+    bool tiaoshi=true;
+    int l_of_long=this->length;
+    int l_of_short=des.length;
+
+    list result;//结果
+    node *divide_pointer=this->head;//指向被除数的某一位的一个指针
+    for(int i=0;i<(l_of_short);i++)
+    {
+        divide_pointer=divide_pointer->next;
+    }
+    int cishu=l_of_long-l_of_short+1;//要计算的位数(首位可能为0)也就是要做循环的次数
+    //todo完成链表的=重载
+    list jian_shu=this->sublist(0,l_of_short);//余数
+    list bei_jian_shu;
+    list yu_shu;
+    int shang;
+    for(int i=0;i<cishu;i++)
+    {
+        shang=0;//商
+        while((jian_shu.sub((des.multi(shang))))>=des)
+        {
+            shang=shang+1;
+        }
+
+        result.addATtail(shang);
+        bei_jian_shu=des.multi(shang);
+        yu_shu = jian_shu.sub(bei_jian_shu);
+        jian_shu=yu_shu;
+        if(tiaoshi)
+        {
+            cout<<endl<<"商"<<shang<<endl;
+            cout<<"减数"<<jian_shu.toString()<<endl;
+            cout<<"被减数"<<bei_jian_shu.toString()<<endl;
+            cout<<"余数"<<yu_shu.toString()<<endl<<endl;
+        }if(divide_pointer!=NULL)
+        {
+            jian_shu.addATtail(divide_pointer->value);
+            divide_pointer=divide_pointer->next;
+        }
+
+    }
+
+
+    //todo去除掉首位的0
+    while(result.length>1&&result.head->value==0)
+    {
+        node * tempNode=result.head;
+        result.head=result.head->next;
+        result.head->pre=NULL;
+        delete tempNode;
+        result.length=result.length-1;
+    }
+
+
+
+    if(tiaoshi)
+    {
+        result.show();
+    }
+    return result;
+}
+
 void list::show()
 {
     cout<<"头节点值"<<this->head->value<<endl;
@@ -284,3 +414,5 @@ void list::show()
     cout<<"list的长度"<<this->length<<endl;
     cout<<"list内容"<<this->toString()<<endl;
 }
+
+
