@@ -110,6 +110,7 @@ void list::copyList(const list &des)
 
 list list::add(const list &des) const
 {
+    bool tiaoshi=false;
     node *t1=des.tail;//尾部指针
 
     node *t2=tail;
@@ -142,6 +143,10 @@ list list::add(const list &des) const
         }
         content=0;
     }
+    if(tiaoshi)
+    {
+        cout<<"list::add结果"<<temp.toString()<<endl;
+    }
     return temp;
 }
 
@@ -155,7 +160,7 @@ list list::sub(const list &des) const
     int content=0;
     int jingwei=0;
     list temp;
-    while(t1!=NULL||t2!=NULL||jingwei!=0)
+    while(t1!=des.head->pre||t2!=head->pre||jingwei!=0)
     {
         if(t1!=NULL)
         {
@@ -192,3 +197,90 @@ list list::sub(const list &des) const
     return temp;
 }
 
+list list::multi(const list &des) const
+{
+    bool tiaoshi=false;
+    //模拟手算乘法;
+    //先判断长度,以减少计算次数
+    list result;
+    list x_long,x_short;//两个乘数,一长一短
+    if(this->length>des.length)
+    {
+        x_long.copyList(*this);
+        x_short.copyList(des);
+    }
+    else
+    {
+        x_long.copyList(des);
+        x_short.copyList(*this);
+    }
+    int l=x_short.length;
+    list *result_array=new list[l];
+    node * x_long_pointer;
+    node * x_short_pointer=x_short.tail;
+    if(tiaoshi)
+    {
+        cout<<"long"<<x_long.toString()<<endl;
+        cout<<"short"<<x_short.toString()<<endl;
+    }
+    //短乘数每一位和长乘数相乘
+    for(int i=0;i<l;i++)
+    {
+        int content=0;
+        int jinwei=0;
+        x_long_pointer=x_long.tail;
+        while(x_long_pointer!=NULL||jinwei!=0)
+        {
+            content+=jinwei;
+            if(x_long_pointer!=NULL)
+                content+=(x_short_pointer->value) * (x_long_pointer->value);
+            jinwei=content/10;
+            content=content%10;
+            result_array[i].addAThead(content);
+            content=0;
+            if(x_long_pointer!=NULL)
+                x_long_pointer=x_long_pointer->pre;
+        }
+        //根据位数在末尾添加相应个数的0
+        for(int j=0;j<i;j++)
+        {
+            result_array[i].addATtail(0);
+        }
+        x_short_pointer=x_short_pointer->pre;
+        if(tiaoshi)
+        {
+            cout<<"result_array["<<i<<"]="<<result_array[i].toString()<<endl;
+        }
+    }
+    //将所有的乘的结果相加
+    for(int i=0;i<l;i++)
+    {
+        result.copyList(result.add(result_array[i]));
+    }
+    //清理战场
+    delete [] result_array;
+    //整理result
+    while(result.length>1&&result.head->value==0)
+    {
+        node * tempNode=result.head;
+        result.head=result.head->next;
+        result.head->pre=NULL;
+        delete tempNode;
+        result.length=result.length-1;
+    }
+
+    if(tiaoshi)
+    {
+        result.show();
+    }
+    return result;
+}
+
+void list::show()
+{
+    cout<<"头节点值"<<this->head->value<<endl;
+    cout<<"头节点pre"<<this->head->pre<<endl;
+    cout<<"尾节点next"<<this->tail->next<<endl;
+    cout<<"list的长度"<<this->length<<endl;
+    cout<<"list内容"<<this->toString()<<endl;
+}

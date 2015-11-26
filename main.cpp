@@ -17,34 +17,28 @@ int main()
     cout<<"输入b"<<endl;
     cin>>b;
     cout<<"b="<<b<<endl;
-    // c=a+b;
-    // cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
-    // c=a-b;
-    // cout<<"c=a-b="<<a-b<<endl;
-    // c=a*b;
-    // cout<<"c=a*b="<<c<<endl;
-    // c=a/b;
-    // cout<<"c=a/b="<<a/b<<endl;
-    // if(a==c)
-    // {
-        // cout<<"a equals c"<<endl;
-    // }
-    // else if (a>c)
-    // {
-        // cout<<"a大于c"<<endl;
-    // }
-    // else if (a<c)
-    // {
-        // cout<<"a小于c"<<endl;
-    // }
-    // else
-    // {
-        // cout<<"怎么可能?!哪里错了"<<endl;
-    // }
-    for(int i=0;i<=10;i++)
+    c=a+b;
+    cout<<"c=a+b="<<a<<"+"<<b<<"="<<c<<endl;
+    c=a-b;
+    cout<<"a=a-b="<<c<<endl;
+    c=a*b;
+    cout<<"c=a*b="<<c<<endl;
+    c=a/b;
+     if(a==c)
     {
-        c=a-b;
+        cout<<"a equals c"<<endl;
     }
-    cout<<"c="<<c<<endl;
+    else if (a>c)
+    {
+        cout<<"a大于c"<<endl;
+    }
+    else if (a<c)
+    {
+        cout<<"a小于c"<<endl;
+    }
+    else
+    {
+        cout<<"怎么可能?!哪里错了"<<endl;
+    }
     return 0;
 }

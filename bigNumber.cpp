@@ -8,9 +8,7 @@ bigNumber::bigNumber()
 
 //默认析构函数
 bigNumber::~bigNumber()
-{
-    number.~list();
-}
+{}
 
 
 bigNumber::bigNumber(string s)
@@ -32,12 +30,21 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 //等号运算符
-void bigNumber::operator=(const bigNumber  des)
+bigNumber &bigNumber::operator=(const bigNumber  &des)
 {
 
     this->number.copyList(des.number);
+    return *this;
 }
+bool bigNumber::operator!=(const bigNumber &b) const
+{
+    bigNumber zero("0");
+    if((*this)-b==zero)
+        return false;
+    else
+        return true;
 
+}
 bool bigNumber::operator==(const bigNumber &b) const
 {
     string x=this->number.toString();
@@ -72,7 +79,7 @@ bool bigNumber::operator>(const bigNumber & b) const
             {
                 if(x[i]>y[i])
                     return true;
-                else if(x[i]<y[i])
+                if(x[i]<y[i])
                     return false;
             }
             cout<<"如果你在程序运行时看到这条信息,代表程序员又要去debug了"<<endl;
@@ -114,68 +121,44 @@ bigNumber bigNumber::operator+(const bigNumber & b) const
 
 bigNumber bigNumber::operator-(const bigNumber & b)const
 {
-    string str;
+
+    bigNumber result;
     if((*this)>b||(*this)==b)//大于或等于就相减
     {
         bigNumber temp((this->number.sub(b.number)).toString());
-        return temp;
+        result=temp;
     }
     else//暂时不考虑负号
     {
-        str=b.number.sub(this->number).toString();
-        bigNumber temp(str);
-        return temp;
-
+        bigNumber temp((b.number.sub(this->number)).toString());
+        result=temp;
     }
-
+    return result;
 }
-bool bigNumber::operator!=(const bigNumber &b) const
-{
-    bigNumber zero("0");
-    if((*this)-b==zero)
-        return false;
-    else
-        return true;
 
-}
 
 bigNumber  bigNumber::operator*(const bigNumber &b) const
 {
-    bigNumber zero("0");
-    bigNumber one("1");
-    bigNumber result;
-    bigNumber x=*this;
-    bigNumber y=b;
-    while(y!=zero)
-    {
-        result=result+x;
-        y=y-one;
-    }
+    bigNumber result(this->number.multi(b.number).toString());
     return result;
 }
 
 bigNumber bigNumber::operator/(const bigNumber &b) const
 {
-    bigNumber zero("0");
-    bigNumber one("1");
-    bigNumber temp;
     bigNumber result;
-    bigNumber x=*this;
-    bigNumber y=b;
-
-    if(y==zero)
+    bigNumber zero("0");
+    if(b==zero)
     {
-        cout<<"divied eror"<<endl;
-        return zero;
+        cout<<"除数不能为0"<<endl;
+    }
+    else if(*this>zero)
+    {
+
     }
     else
     {
-        while(x>y||x==y)
-        {
-            x=x-y;
-            result=result+one;
-            cout<<"循环中...."<<endl;
-        }
-        return result;
+        ;
     }
+
+    return result;
 }

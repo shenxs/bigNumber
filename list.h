@@ -21,6 +21,7 @@ public:
     void init(string s);
     //list of int ->string
     //将一个链表表示的数字拼接为一个字符串
+    void show();//调试显示所有的list信息
     string toString();
     string toString() const;
     //从另一个链表拷贝
@@ -30,7 +31,7 @@ public:
     //将两个链表相加
     list add(const list &des) const;
     list sub(const list &des) const;
-
+    list multi(const list &des) const;
     node *head;//头指针
     node *tail;//尾指针
     int length;//数字既链表的长度
