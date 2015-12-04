@@ -156,6 +156,10 @@ bigNumber bigNumber::operator/(const bigNumber &b) const
     {
         result=one;
     }
+    else if((*this)<b)
+    {
+         result=zero;
+    }
     else
     {
         bigNumber temp(this->number.divide(b.number).toString());
@@ -164,4 +168,29 @@ bigNumber bigNumber::operator/(const bigNumber &b) const
     }
 
     return result;
+}
+
+bigNumber bigNumber::operator^(const bigNumber &b) const
+{
+    bigNumber one("1");
+    bigNumber zero("0");
+
+    bigNumber temp=b;
+
+    bigNumber result("1");//先将结果初始化为1
+    if(temp==zero)
+    {
+        return result;
+    }
+    else
+    {
+        while(temp!=zero)
+        {
+            result=result*(*this);
+            temp=temp-one;
+        }
+        return result;
+    }
+
+
 }

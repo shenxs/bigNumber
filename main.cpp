@@ -24,9 +24,11 @@ int main()
     cout<<"c=a*b="<<c<<endl;
     c=a/b;
     cout<<"c=a/b="<<c<<endl;
-     if(a==c)
+    c=(a^b)/c;
+    cout<<"c=(a^b)/c="<<c<<endl;
+    if(a==c)
     {
-        cout<<"a equals c"<<endl;
+        cout<<"a 等于c"<<endl;
     }
     else if (a>c)
     {

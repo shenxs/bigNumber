@@ -16,7 +16,7 @@ public:
     bigNumber &operator=(const bigNumber &b);
     bool      operator==(const bigNumber &b) const;
     bool      operator!=(const bigNumber &b) const;
-    bool      operator>(const bigNumber  &b ) const;
+    bool      operator>(const bigNumber  &b) const;
     bool      operator<(const bigNumber  &b) const;
 
 //加减乘除
@@ -24,6 +24,8 @@ public:
     bigNumber operator-(const bigNumber &b) const;
     bigNumber operator*(const bigNumber &b) const;
     bigNumber operator/(const bigNumber &b) const;
+
+    bigNumber operator^(const bigNumber &b) const;//指数运算重载
 private:
     list number;
 };

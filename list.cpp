@@ -344,9 +344,9 @@ list list::multi(int n) const
 
 list list::divide(const list&des)const
 {
-    bool tiaoshi=true;
-    int l_of_long=this->length;
-    int l_of_short=des.length;
+    bool tiaoshi=false;
+    int l_of_long=this->length;//被除数
+    int l_of_short=des.length;//除数
 
     list result;//结果
     node *divide_pointer=this->head;//指向被除数的某一位的一个指针
