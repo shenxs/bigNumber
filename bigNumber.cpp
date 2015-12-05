@@ -175,8 +175,8 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     bigNumber two("2");
     bigNumber one("1");
     bigNumber zero("0");
-            (*this).number.show();
     bigNumber result=*this;//先将结果初始化为底数
+    string moming=(*this).number.toString();
     if(b==zero)
     {
         result=one;
@@ -185,19 +185,17 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     {
         bigNumber aim=b;
         result=one;
-        (*this).number.show();
+        bigNumber x;
         while(aim!=zero)
         {
-            (*this).number.show();
+            cout<<moming<<endl;
             bigNumber second=one;
             aim=aim-second;
-            (*this).number.show();
-            bigNumber x=(*this);
-            x.number.show();
+            x.number.init(moming);
             while(second<aim||second==aim)
             {
                 aim=aim-second;
-                second=second*second;
+                second=second*two;
                 x=x*x;
             }
             result=result*x;
