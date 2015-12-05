@@ -5,5 +5,5 @@ run:a.out
 	./a.out
 
 test:a.out
-	gdb ./a.out
+	gdb -tui ./a.out
 

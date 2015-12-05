@@ -33,7 +33,7 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
 bigNumber &bigNumber::operator=(const bigNumber  &des)
 {
 
-    this->number.copyList(des.number);
+    this->number=des.number;
     return *this;
 }
 bool bigNumber::operator!=(const bigNumber &b) const
@@ -172,25 +172,37 @@ bigNumber bigNumber::operator/(const bigNumber &b) const
 
 bigNumber bigNumber::operator^(const bigNumber &b) const
 {
+    bigNumber two("2");
     bigNumber one("1");
     bigNumber zero("0");
-
-    bigNumber temp=b;
-
-    bigNumber result("1");//先将结果初始化为1
-    if(temp==zero)
+            (*this).number.show();
+    bigNumber result=*this;//先将结果初始化为底数
+    if(b==zero)
     {
-        return result;
+        result=one;
     }
     else
     {
-        while(temp!=zero)
+        bigNumber aim=b;
+        result=one;
+        (*this).number.show();
+        while(aim!=zero)
         {
-            result=result*(*this);
-            temp=temp-one;
+            (*this).number.show();
+            bigNumber second=one;
+            aim=aim-second;
+            (*this).number.show();
+            bigNumber x=(*this);
+            x.number.show();
+            while(second<aim||second==aim)
+            {
+                aim=aim-second;
+                second=second*second;
+                x=x*x;
+            }
+            result=result*x;
         }
-        return result;
     }
 
-
+    return result;
 }

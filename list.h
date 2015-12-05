@@ -22,6 +22,7 @@ public:
     //list of int ->string
     //将一个链表表示的数字拼接为一个字符串
     void show();//调试显示所有的list信息
+    void show() const ;
     string toString();
     string toString() const;
     //从另一个链表拷贝

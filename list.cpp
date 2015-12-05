@@ -21,8 +21,8 @@ list::~list()
 {
     while(length>0)
     {
-        node* temp=tail;
-        tail=tail->pre;
+        node* temp=head;
+        head=head->next;
         delete temp;
         length--;
     }
@@ -31,7 +31,7 @@ list::~list()
 
 list & list::operator=(const list &des)
 {
-    this->copyList(des);
+    this->init(des.toString());
     return *this;
 }
 
@@ -69,7 +69,6 @@ bool list::operator>=(const list &des)
     {
         return false;
     }
-
 }
 
 //在链表的尾部增加
@@ -257,13 +256,13 @@ list list::multi(const list &des) const
     list x_long,x_short;//两个乘数,一长一短
     if(this->length>des.length)
     {
-        x_long.copyList(*this);
-        x_short.copyList(des);
+        x_long=*this;
+        x_short=des;
     }
     else
     {
-        x_long.copyList(des);
-        x_short.copyList(*this);
+        x_long=des;
+        x_short=*this;
     }
     int l=x_short.length;
     list *result_array=new list[l];
@@ -306,7 +305,7 @@ list list::multi(const list &des) const
     //将所有的乘的结果相加
     for(int i=0;i<l;i++)
     {
-        result.copyList(result.add(result_array[i]));
+        result=(result.add(result_array[i]));
     }
     //清理战场
     delete [] result_array;
@@ -415,4 +414,13 @@ void list::show()
     cout<<"list内容"<<this->toString()<<endl;
 }
 
+
+void list::show()const
+{
+    cout<<"头节点值"<<this->head->value<<endl;
+    cout<<"头节点pre"<<this->head->pre<<endl;
+    cout<<"尾节点next"<<this->tail->next<<endl;
+    cout<<"list的长度"<<this->length<<endl;
+    cout<<"list内容"<<this->toString()<<endl;
+}
 

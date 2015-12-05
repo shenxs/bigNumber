@@ -6,7 +6,6 @@
 #include"list.h"
 using namespace std;
 
-
 int main()
 {
 
@@ -23,6 +22,8 @@ int main()
     cout<<"c=a-b="<<c<<endl;
     c=a*b;
     cout<<"c=a*b="<<c<<endl;
+    c=c*c;
+    cout<<"c=c*c="<<c<<endl;
     c=a/b;
     cout<<"c=a/b="<<c<<endl;
     clock_t start,end;
