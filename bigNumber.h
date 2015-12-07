@@ -13,7 +13,7 @@ public:
     friend istream& operator >> (istream&,bigNumber&); //输入流重载
 
  //比较运算符重载
-    bigNumber &operator=(const bigNumber &b);
+    bigNumber & operator=(const bigNumber & b);
     bool      operator==(const bigNumber &b) const;
     bool      operator!=(const bigNumber &b) const;
     bool      operator>(const bigNumber  &b) const;

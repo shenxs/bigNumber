@@ -30,20 +30,18 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
     return input;
 }
 //等号运算符
-bigNumber &bigNumber::operator=(const bigNumber  &des)
+bigNumber &bigNumber::operator=(const bigNumber & des)
 {
 
-    this->number=des.number;
+    this->number.init(des.number.toString());
     return *this;
 }
 bool bigNumber::operator!=(const bigNumber &b) const
 {
-    bigNumber zero("0");
-    if((*this)-b==zero)
+    if((*this)==b)
         return false;
     else
         return true;
-
 }
 bool bigNumber::operator==(const bigNumber &b) const
 {
@@ -185,11 +183,11 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     {
         bigNumber aim=b;
         result=one;
+        bigNumber second;
         bigNumber x;
         while(aim!=zero)
         {
-            cout<<moming<<endl;
-            bigNumber second=one;
+            second=one;
             aim=aim-second;
             x.number.init(moming);
             while(second<aim||second==aim)
