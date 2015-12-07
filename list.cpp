@@ -328,6 +328,12 @@ list list::multi(const list &des) const
 
 list list::multi(int n) const
 {
+    if(n==0)
+    {
+        list temp;
+        temp.init("0");
+        return this->multi(temp);
+    }
     char char_n;
     string temp;
     while(n!=0)
@@ -379,7 +385,16 @@ list list::divide(const list&des)const
             cout<<"余数"<<yu_shu.toString()<<endl<<endl;
         }if(divide_pointer!=NULL)
         {
-            jian_shu.addATtail(divide_pointer->value);
+            //需要判断jian_shu是否为0
+            //否则会出现开头为0的数字
+            if(jian_shu.head->value==0)
+            {
+                jian_shu.head->value=divide_pointer->value;
+            }
+            else
+            {
+                jian_shu.addATtail(divide_pointer->value);
+            }
             divide_pointer=divide_pointer->next;
         }
 
