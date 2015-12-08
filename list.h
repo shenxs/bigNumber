@@ -25,10 +25,9 @@ public:
     void show() const ;
     string toString();
     string toString() const;
-    //从另一个链表拷贝
-    void copyList(const list &des);
     list & operator=(const list &des);
     list sublist(int ,int ) const;
+    void copyList(const list &des);
     bool operator>=(const list &des);
     list add(const list &des) const;
     list sub(const list &des) const;

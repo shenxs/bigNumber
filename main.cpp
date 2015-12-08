@@ -26,12 +26,12 @@ int main()
     cout<<"c=c*c="<<c<<endl;
     c=a/b;
     cout<<"c=a/b="<<c<<endl;
-    // clock_t start,end;
-    // start=clock();
-    // c=a^b;
-    // end=clock();
-    // cout<<"用时"<<end-start<<"×10^(-6)秒"<<endl;
-    // cout<<"c=(a^b)="<<c<<endl;
+    clock_t start,end;
+    start=clock();
+    c=a^b;
+    end=clock();
+    cout<<"用时"<<end-start<<"×10^(-6)秒"<<endl;
+    cout<<"c=(a^b)="<<c<<endl;
     if(a==c)
     {
         cout<<"a 等于c"<<endl;
@@ -48,14 +48,14 @@ int main()
     {
         cout<<"怎么可能?!哪里错了"<<endl;
     }
-    if(1)
+    if(0)
     {
         bigNumber x("2");
         bigNumber y("6");
         bigNumber z("1");
         for(int i=1;i<=10000000;i++)
         {
-            z=x*y;
+            x=x*y;
         }
     }
     return 0;

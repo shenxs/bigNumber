@@ -265,7 +265,8 @@ list list::multi(const list &des) const
         x_short=*this;
     }
     int l=x_short.length;
-    list *result_array=new list[l];
+    // list *result_array=new list[l];
+    list temp_list;//用于储存每一次乘法的结果
     node * x_long_pointer;
     node * x_short_pointer=x_short.tail;
     if(tiaoshi)
@@ -286,7 +287,7 @@ list list::multi(const list &des) const
                 content+=(x_short_pointer->value) * (x_long_pointer->value);
             jinwei=content/10;
             content=content%10;
-            result_array[i].addAThead(content);
+            temp_list.addAThead(content);
             content=0;
             if(x_long_pointer!=NULL)
                 x_long_pointer=x_long_pointer->pre;
@@ -294,22 +295,20 @@ list list::multi(const list &des) const
         //根据位数在末尾添加相应个数的0
         for(int j=0;j<i;j++)
         {
-            result_array[i].addATtail(0);
+            temp_list.addATtail(0);
         }
         x_short_pointer=x_short_pointer->pre;
-        if(tiaoshi)
-        {
-            cout<<"result_array["<<i<<"]="<<result_array[i].toString()<<endl;
-        }
+        result=result.add(temp_list);
+        temp_list.~list();
     }
     //将所有的乘的结果相加
-    for(int i=0;i<l;i++)
-    {
-        result=(result.add(result_array[i]));
-    }
+    // for(int i=0;i<l;i++)
+    // {
+        // result=(result.add(result_array[i]));
+    // }
     //清理战场
-    delete [] result_array;
-    //整理result
+    // delete [] result_array;
+    //整理result 防止出现乘0之后出现一大串0
     while(result.length>1&&result.head->value==0)
     {
         node * tempNode=result.head;

@@ -10,7 +10,6 @@ bigNumber::bigNumber()
 bigNumber::~bigNumber()
 {}
 
-
 bigNumber::bigNumber(string s)
 {
     //初始化数字链表
@@ -175,7 +174,12 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     bigNumber zero("0");
     bigNumber result=*this;//先将结果初始化为底数
     string moming=(*this).number.toString();
-    if(b==zero)
+    if(b==zero&&(*this)==zero)
+    {
+        cout<<"0的0次没有意义"<<endl;
+        result=zero;
+    }
+    else if(b==zero)
     {
         result=one;
     }
