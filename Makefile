@@ -7,3 +7,5 @@ run:a.out
 test:a.out
 	gdb -tui ./a.out
 
+tes:a.out
+	gdb ./a.out

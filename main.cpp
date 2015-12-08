@@ -16,8 +16,14 @@ int main()
     cout<<"输入b"<<endl;
     cin>>b;
     cout<<"b="<<b<<endl;
+
     c=a%b;
     cout<<"c=a%"<<"b="<<c<<endl;
+
+    cout<<"a转化为二进制:"<<endl;
+    a.binary();
+
+    a.input_Binary();
 
     c=a+b;
     cout<<"c=a+b="<<c<<endl;
@@ -35,5 +41,5 @@ int main()
     end=clock();
     cout<<"用时"<<end-start<<"×10^(-6)秒"<<endl;
     cout<<"c=(a^b)="<<c<<endl;
-   return 0;
+    return 0;
 }

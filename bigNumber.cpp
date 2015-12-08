@@ -27,9 +27,60 @@ istream& operator >> (istream& input,bigNumber& b)
     b.number.init(str);
     return input;
 }
+bigNumber bigNumber::int2bigNumber(int n)
+{
+    string str;
+    if(n==0)
+    {
+        str="0";
+    }
+    else
+    {
+        while(n!=0)
+        {
+            str+=(n%10)+'0';
+            n/=10;
+        }
+    }
+    bigNumber temp(str);
+    return temp;
+
+}
+void bigNumber::input_Binary()
+{
+    bigNumber two("2");
+    string str;
+    this->number.init("0");
+    cout<<"请输入一个二进制数";
+    cin>>str;
+    int l=str.length();
+    for(int i=0;i<l;i++)
+    {
+
+        if(str[i]=='1')
+        {
+            int zhishu=l-i-1;
+            bigNumber temp=two^zhishu;
+            (*this)=(*this)+temp;
+        }
+    }
+ }
 void bigNumber::binary()
 {
-    //to be continue
+    string str;
+    bigNumber two("2");
+    bigNumber one("1");
+    bigNumber temp;
+    temp.number.init((*this).number.toString());
+    while(temp>one)
+    {
+        str=(temp%two).number.toString()+str;
+        temp=temp/two;
+    }
+    if(temp==one)
+        str="1"+str;
+
+    cout<<str<<endl;
 }
 void bigNumber::show()
 {
@@ -41,8 +92,18 @@ void bigNumber::show()
 
 bigNumber &bigNumber::operator=(const bigNumber & des)
 {
-    this->number.init(des.number.toString());
+    this->number=des.number;
     return *this;
+}
+bigNumber &bigNumber::operator=(int b)
+{
+
+    bigNumber temp;
+    temp=temp.int2bigNumber(b);
+
+    this->number=temp.number;
+    return *this;
+
 }
 bool bigNumber::operator!=(const bigNumber &b) const
 {
@@ -63,6 +124,13 @@ bool bigNumber::operator==(const bigNumber &b) const
     {
         return false;
     }
+}
+bool bigNumber::operator==(int b)const
+{
+    bigNumber temp;
+    temp=temp.int2bigNumber(b);
+
+    return (*this)==temp;
 }
 
 bool bigNumber::operator>(const bigNumber & b) const
@@ -158,7 +226,7 @@ bigNumber bigNumber::operator/(const bigNumber &b) const
     }
     else if((*this)==b)
     {
-        result=one;
+        result=1;
     }
     else if((*this)<b)
     {
@@ -183,6 +251,7 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     result.number.init(this->number.toString());//先将结果初始化为底数
     string moming=(*this).number.toString();
 
+    bigNumber aim;
     if(b==zero&&(*this)==zero)
     {
         cout<<"0的0次没有意义"<<endl;
@@ -194,7 +263,7 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     }
     else
     {
-        bigNumber aim=b;
+        aim=b;
         result=one;
         bigNumber second;
         bigNumber x;
@@ -202,7 +271,7 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
         {
             second=one;
             aim=aim-second;
-            x.number.init(moming);
+            x=(*this);
             while(second<aim||second==aim)
             {
                 aim=aim-second;
@@ -214,6 +283,25 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     }
 
     return result;
+}
+bigNumber bigNumber::operator^(int b) const
+{
+    string str;
+    if(b==0)
+    {
+        str="0";
+    }
+    else
+    {
+        while(b!=0)
+        {
+            str+=(b%10)+'0';
+            b/=10;
+        }
+    }
+    bigNumber temp;
+    temp.number.init(str);
+    return (*this)^temp;
 }
 
 bigNumber bigNumber::operator%(const bigNumber & b) const
