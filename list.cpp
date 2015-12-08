@@ -8,7 +8,6 @@ list::list()
 }
 list::list(int n)
 {
-    this->~list();
     string temp="";
     for(int i=0;i<n;i++)
     {
@@ -16,62 +15,53 @@ list::list(int n)
     }
     this->init(temp);
 }
-//析构函数
+list::list(string s)
+{
+    this->~list();
+    int l=s.length();
+    for (int i = 0; i < l; ++i)
+    {
+        int n=s[i]-'0';
+        if(n>=0&&n<=9)
+        {
+            addATtail(s[i]-'0');
+        }
+        else
+        {
+            cout<<"构造字段包含非数字字符"<<endl;
+        }
+    }
+}
 list::~list()
 {
     while(length>0)
     {
-        node* temp=head;
-        head=head->next;
+        node* temp=tail;
+        tail=tail->pre;
         delete temp;
         length--;
     }
     head=NULL;//删除最后一个节点后将头指针置空
 }
-
-list & list::operator=(const list &des)
+void list::addAThead(int n)
 {
-    this->init(des.toString());
-    return *this;
-}
-
-bool list::operator>=(const list &des)
-{
-    string x=this->toString();
-    string y=des.toString();
-
-    if(x.length()==y.length())
+    node * temp=new node(n);
+    if(length==0)
     {
-        if(x==y)
-        {
-            return true;
-        }
-        else//zhu wei bi jiao
-        {
-            int l=x.length();
-            for(int i=0;i<l;i++)
-            {
-                if(x[i]>y[i])
-                    return true;
-                if(x[i]<y[i])
-                    return false;
-            }
-            cout<<"如果你在程序运行时看到这条信息,代表程序员又要去debug了"<<endl;
-            return false;
-        }
-    }
-
-    else if(x.length()>y.length())
-    {
-        return true;
+        head=temp;
+        tail=temp;
+        length++;
     }
     else
     {
-        return false;
+        temp->next=head;
+        head->pre=temp;
+        head=temp;
+        length++;
     }
 }
 
-//在链表的尾部增加
+
 void list::addATtail(int n)
 {
     node *temp=new node(n);
@@ -87,7 +77,7 @@ void list::addATtail(int n)
     }
     length++;
 }
-//初始化链表
+
 void list::init(string s)
 {
     this->~list();
@@ -96,14 +86,35 @@ void list::init(string s)
     {
         int n=s[i]-'0';
         if(n>=0&&n<=9)
+        {
             addATtail(s[i]-'0');
+        }
         else
         {
             cout<<"构造字段包含非数字字符"<<endl;
         }
     }
 }
-//转化为字符串
+
+void list::show()
+{
+    cout<<"头节点值"<<this->head->value<<endl;
+    cout<<"头节点pre"<<this->head->pre<<endl;
+    cout<<"尾节点next"<<this->tail->next<<endl;
+    cout<<"list的长度"<<this->length<<endl;
+    cout<<"list内容"<<this->toString()<<endl;
+}
+
+
+void list::show()const
+{
+    cout<<"头节点值"<<this->head->value<<endl;
+    cout<<"头节点pre"<<this->head->pre<<endl;
+    cout<<"尾节点next"<<this->tail->next<<endl;
+    cout<<"list的长度"<<this->length<<endl;
+    cout<<"list内容"<<this->toString()<<endl;
+}
+
 string list::toString()
 {
     string str="";
@@ -127,47 +138,64 @@ string list::toString() const
     return str;
 }
 
-list list::sublist(int start,int end ) const
+
+list & list::operator=(const list &des)
 {
-    list temp;
-    temp.init(this->toString().substr(start,end));
-    return temp;
+    this->init(des.toString());
+    return *this;
 }
 
-void list::addAThead(int n)
+bool list::operator>=(const list &des)
 {
-    node * temp=new node(n);
-    if(this->length==0)
+    string x=this->toString();
+    string y=des.toString();
+
+    if(x.length()==y.length())
     {
-        head=temp;
-        tail=temp;
-        length++;
+        if(x==y)//两个字符串相等
+        {
+            return true;
+        }
+        else//逐位比较
+        {
+            int l=x.length();
+            for(int i=0;i<l;i++)
+            {
+                if(x[i]>y[i])
+                    return true;
+                if(x[i]<y[i])
+                    return false;
+            }
+            cout<<"如果你在程序运行时看到这条信息,代表程序员又要去debug了"<<endl;
+            return false;
+        }
+    }
+    else if(x.length()>y.length())
+    {
+        return true;
     }
     else
     {
-        temp->next=head;
-        head->pre=temp;
-        head=temp;
-        length++;
+        return false;
     }
 }
-
-void list::copyList(const list &des)
+list list::sublist(int start,int end ) const
 {
-    string temp=des.toString();
-    this->init(temp);
+    list temp;
+    string str=this->toString();
+    string sub_string=str.substr(start,end);
+    temp.init(sub_string);
+    return temp;
 }
-
 list list::add(const list &des) const
 {
     bool tiaoshi=false;
     node *t1=des.tail;//尾部指针
+    node *t2=this->tail;
 
-    node *t2=tail;
-
-    int content=0;
-    int jingwei=0;
-    list temp;
+    int content=0;//每一位的计算结果
+    int jingwei=0;//进位
+    list result;//局部变量,存结果
     while(t1!=NULL||t2!=NULL||jingwei!=0)
     {
         if(t1!=NULL)
@@ -184,37 +212,35 @@ list list::add(const list &des) const
         if(content>9)
         {
                 jingwei=1;
-                temp.addAThead(content-10);
+                result.addAThead(content-10);
         }
         else
         {
             jingwei=0;
-            temp.addAThead(content);
+            result.addAThead(content);
         }
         content=0;
     }
     if(tiaoshi)
     {
-        cout<<"list::add结果"<<temp.toString()<<endl;
+        cout<<"list::add结果"<<result.toString()<<endl;
     }
-    return temp;
+    return result;
 }
 
-//减法即a+(-b) 进位对应为-1
 list list::sub(const list &des) const
 {
     node *t1=des.tail;//尾部指针
+    node *t2=this->tail;
 
-    node *t2=tail;
-
-    int content=0;
-    int jingwei=0;
-    list temp;
+    int content=0;//每一位的计算结果
+    int jingwei=0;//进位
+    list result;//结果
     while(t1!=NULL||t2!=NULL||jingwei!=0)
     {
         if(t1!=NULL)
         {
-            content+=(-1)*(t1->value);
+            content-=t1->value;
             t1=t1->pre;
         }
         if(t2!=NULL)
@@ -226,25 +252,25 @@ list list::sub(const list &des) const
         if(content<0)
         {
                 jingwei=-1;
-                temp.addAThead(content+10);
+                result.addAThead(content+10);
         }
         else
         {
             jingwei=0;
-            temp.addAThead(content);
+            result.addAThead(content);
         }
         content=0;
     }
     //如果链表的一开始有大量的0 要去除
-    while(temp.length>1&&temp.head->value==0)
+    while(result.length>1&&result.head->value==0)
     {
-        node * tempNode=temp.head;
-        temp.head=temp.head->next;
-        temp.head->pre=NULL;
+        node * tempNode=result.head;
+        result.head=result.head->next;
+        result.head->pre=NULL;
         delete tempNode;
-        temp.length=temp.length-1;
+        result.length=result.length-1;
     }
-    return temp;
+    return result;
 }
 
 list list::multi(const list &des) const
@@ -265,7 +291,6 @@ list list::multi(const list &des) const
         x_short=*this;
     }
     int l=x_short.length;
-    // list *result_array=new list[l];
     list temp_list;//用于储存每一次乘法的结果
     node * x_long_pointer;
     node * x_short_pointer=x_short.tail;
@@ -301,13 +326,6 @@ list list::multi(const list &des) const
         result=result.add(temp_list);
         temp_list.~list();
     }
-    //将所有的乘的结果相加
-    // for(int i=0;i<l;i++)
-    // {
-        // result=(result.add(result_array[i]));
-    // }
-    //清理战场
-    // delete [] result_array;
     //整理result 防止出现乘0之后出现一大串0
     while(result.length>1&&result.head->value==0)
     {
@@ -399,7 +417,6 @@ list list::divide(const list&des)const
 
     }
 
-
     //todo去除掉首位的0
     while(result.length>1&&result.head->value==0)
     {
@@ -410,31 +427,10 @@ list list::divide(const list&des)const
         result.length=result.length-1;
     }
 
-
-
     if(tiaoshi)
     {
         result.show();
     }
     return result;
-}
-
-void list::show()
-{
-    cout<<"头节点值"<<this->head->value<<endl;
-    cout<<"头节点pre"<<this->head->pre<<endl;
-    cout<<"尾节点next"<<this->tail->next<<endl;
-    cout<<"list的长度"<<this->length<<endl;
-    cout<<"list内容"<<this->toString()<<endl;
-}
-
-
-void list::show()const
-{
-    cout<<"头节点值"<<this->head->value<<endl;
-    cout<<"头节点pre"<<this->head->pre<<endl;
-    cout<<"尾节点next"<<this->tail->next<<endl;
-    cout<<"list的长度"<<this->length<<endl;
-    cout<<"list内容"<<this->toString()<<endl;
 }
 
