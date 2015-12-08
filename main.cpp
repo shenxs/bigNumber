@@ -16,6 +16,9 @@ int main()
     cout<<"输入b"<<endl;
     cin>>b;
     cout<<"b="<<b<<endl;
+    c=a%b;
+    cout<<"c=a%"<<"b="<<c<<endl;
+
     c=a+b;
     cout<<"c=a+b="<<c<<endl;
     c=a-b;
@@ -32,6 +35,5 @@ int main()
     end=clock();
     cout<<"用时"<<end-start<<"×10^(-6)秒"<<endl;
     cout<<"c=(a^b)="<<c<<endl;
-    c.show();
-    return 0;
+   return 0;
 }

@@ -27,6 +27,10 @@ istream& operator >> (istream& input,bigNumber& b)
     b.number.init(str);
     return input;
 }
+void bigNumber::binary()
+{
+    //to be continue
+}
 void bigNumber::show()
 {
     int l=this->number.length;
@@ -210,4 +214,9 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     }
 
     return result;
+}
+
+bigNumber bigNumber::operator%(const bigNumber & b) const
+{
+    return ((*this)- ((*this)/b)*b);
 }
