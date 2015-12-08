@@ -41,5 +41,6 @@ int main()
     end=clock();
     cout<<"用时"<<end-start<<"×10^(-6)秒"<<endl;
     cout<<"c=(a^b)="<<c<<endl;
+    cout<<a%b<<endl;
     return 0;
 }

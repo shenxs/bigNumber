@@ -14,6 +14,10 @@ bigNumber::bigNumber(string s)
 {
     number.init(s);
 }
+bigNumber::bigNumber(const bigNumber &b)
+{
+    this->number.init(b.number.toString());
+}
 ostream& operator<<(ostream& output,const bigNumber& b)
 {
    output<<b.number.toString();
@@ -51,7 +55,7 @@ void bigNumber::input_Binary()
     bigNumber two("2");
     string str;
     this->number.init("0");
-    cout<<"请输入一个二进制数";
+    cout<<"请输入一个二进制数"<<endl;
     cin>>str;
     int l=str.length();
     for(int i=0;i<l;i++)
@@ -111,6 +115,13 @@ bool bigNumber::operator!=(const bigNumber &b) const
         return false;
     else
         return true;
+}
+bool bigNumber::operator!=(int b) const
+{
+
+    bigNumber temp;
+    temp=temp.int2bigNumber(b);
+    return (*this)!=temp;
 }
 bool bigNumber::operator==(const bigNumber &b) const
 {
@@ -251,23 +262,22 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     result.number.init(this->number.toString());//先将结果初始化为底数
     string moming=(*this).number.toString();
 
-    bigNumber aim;
-    if(b==zero&&(*this)==zero)
+    if(b==0&&(*this)==0)
     {
         cout<<"0的0次没有意义"<<endl;
-        result=zero;
+        result=0;
     }
-    else if(b==zero)
+    else if(b==0)
     {
         result=one;
     }
     else
     {
-        aim=b;
+         bigNumber aim=b;
         result=one;
         bigNumber second;
         bigNumber x;
-        while(aim!=zero)
+        while(aim!=0)
         {
             second=one;
             aim=aim-second;

@@ -6,6 +6,7 @@ class bigNumber
 public:
     bigNumber();//无参构造方法,默认为0
     bigNumber(string s);//以字符串初始化
+    bigNumber(const bigNumber &b);//坑,忘了写copy构造
     ~bigNumber();
 
  //io流运算符重载为友元函数
@@ -16,10 +17,12 @@ public:
     void input_Binary();
     void show();//显示内容和长度
  //比较运算符重载
-    bigNumber & operator=(const bigNumber & b);
-    bigNumber & operator=(int b);
-    bool      operator==(const bigNumber &b) const;
+
+    bool      operator!=(int b) const;
     bool      operator==(int b) const;
+    bigNumber &operator=(int b);
+    bigNumber &operator=(const bigNumber & b);
+    bool      operator==(const bigNumber &b) const;
     bool      operator!=(const bigNumber &b) const;
     bool      operator>(const bigNumber  &b) const;
     bool      operator<(const bigNumber  &b) const;
