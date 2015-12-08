@@ -11,7 +11,7 @@ public:
  //io流运算符重载为友元函数
     friend ostream& operator << (ostream&,const  bigNumber&);//输出流重载
     friend istream& operator >> (istream&,bigNumber&); //输入流重载
-
+    void show();//显示内容和长度
  //比较运算符重载
     bigNumber & operator=(const bigNumber & b);
     bool      operator==(const bigNumber &b) const;
@@ -24,7 +24,6 @@ public:
     bigNumber operator-(const bigNumber &b) const;
     bigNumber operator*(const bigNumber &b) const;
     bigNumber operator/(const bigNumber &b) const;
-
     bigNumber operator^(const bigNumber &b) const;//指数运算重载
 private:
     list number;

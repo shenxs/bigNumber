@@ -27,6 +27,14 @@ istream& operator >> (istream& input,bigNumber& b)
     b.number.init(str);
     return input;
 }
+void bigNumber::show()
+{
+    int l=this->number.length;
+    cout<<"位数:"<<l<<endl;
+    cout<<"数字:"<<*this<<endl;
+}
+
+
 bigNumber &bigNumber::operator=(const bigNumber & des)
 {
     this->number.init(des.number.toString());
