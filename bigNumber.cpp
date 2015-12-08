@@ -8,7 +8,9 @@ bigNumber::bigNumber()
 
 //默认析构函数
 bigNumber::~bigNumber()
-{}
+{
+    this->number.~list();
+}
 
 bigNumber::bigNumber(string s)
 {
@@ -31,7 +33,6 @@ istream& operator >> (istream& input,bigNumber& b)  //定义重载运算符“>>
 //等号运算符
 bigNumber &bigNumber::operator=(const bigNumber & des)
 {
-
     this->number.init(des.number.toString());
     return *this;
 }
@@ -172,9 +173,11 @@ bigNumber bigNumber::operator^(const bigNumber &b) const
     bigNumber two("2");
     bigNumber one("1");
     bigNumber zero("0");
-    bigNumber result=*this;//先将结果初始化为底数
+    bigNumber result;
+    result.number.init(this->number.toString());//先将结果初始化为底数
     string moming=(*this).number.toString();
-    if(b==zero&&(*this)==zero)
+
+   if(b==zero&&(*this)==zero)
     {
         cout<<"0的0次没有意义"<<endl;
         result=zero;
