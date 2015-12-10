@@ -86,11 +86,10 @@ void bigNumber::binary()
 
     cout<<str<<endl;
 }
-void bigNumber::show()
+void bigNumber::showLength()
 {
     int l=this->number.length;
     cout<<"位数:"<<l<<endl;
-    cout<<"数字:"<<*this<<endl;
 }
 
 
@@ -317,4 +316,27 @@ bigNumber bigNumber::operator^(int b) const
 bigNumber bigNumber::operator%(const bigNumber & b) const
 {
     return ((*this)- ((*this)/b)*b);
+}
+
+bigNumber bigNumber::quickMod(const bigNumber &b ,const bigNumber &c)
+{
+
+    bigNumber A,B,C;
+    bigNumber zero("0");
+    bigNumber two("2");
+    A=(*this);
+    B=b;
+    C=c;
+    bigNumber ans;
+
+    ans=1;
+    A=A%C;
+    while(B>zero)
+    {
+        if(B%two==1)
+            ans=(ans*A)%C;
+        B=B/two;
+        A=(A*A)%C;
+    }
+    return ans;
 }

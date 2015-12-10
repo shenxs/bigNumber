@@ -1,4 +1,5 @@
 #include"list.h"
+#include"time.h"
 #include<string>
 using namespace std;
 class bigNumber
@@ -15,7 +16,7 @@ public:
     bigNumber int2bigNumber(int);//int类型到bigNumber类型的转换
     void binary();//二进制输出
     void input_Binary();
-    void show();//显示内容和长度
+    void showLength();//显示和长度
  //比较运算符重载
 
     bool      operator!=(int b) const;
@@ -35,6 +36,7 @@ public:
     bigNumber operator^(const bigNumber &b) const;//指数运算重载
     bigNumber operator^(int b) const;//指数运算重载
     bigNumber operator%(const bigNumber &b) const;
+    bigNumber quickMod(const bigNumber &b ,const bigNumber &c);
 private:
     list number;
 };
