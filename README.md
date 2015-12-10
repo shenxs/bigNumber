@@ -1,8 +1,6 @@
-# bigNumber
 
 ## 大整数的运算
 
-----
 
 ### 实验要求
 1.要求采用链表来实现大整数的存储和运算，不允许使用标准模板类的链表类(list)和函数。同时要求可以从键盘输入大整数，也可以文件输入大整数，大整数可以输出至显示器，也可以输出至文件。大整数的存储、运算和显示，可以同时支持二进制和十进制，但至少要支持十进制。大整数输出显示时，必须能清楚地表达出整数的位数。测试时，各种情况都需要测试，并附上测试截图；
@@ -24,5 +22,44 @@
 9.要求采用Visual C++ 6.0及以上版本进行调试；
 
 ----
+
+### 算法实现
+#### + - * /
+- 全部采用模拟手算的方式实现
+#### ^指数运算
+##### 一般指数运算
+- - 例:
+- - 计算2^100
+- - 2^100=
+- -     =2^1 * 2^99
+- -     =2^2 * 2^98
+- -     =2^4 * 2^96
+- -     =2^8 * 2^92
+- -     .....
+##### 指数取模
+- 使用快速幂实现
+
 ## 浙江工业大学 数据结构大型实验
+----
+---
+one line to give the program's name and a brief description
+Copyright © 2015 yourname
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
