@@ -1,9 +1,10 @@
-#include "bigNumber.h"
+﻿#include "bigNumber.h"
 
 bigNumber::bigNumber()
 {
     number.init("0");
 }
+//dhsdjdfk
 
 bigNumber::~bigNumber()
 {
